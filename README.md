@@ -33,22 +33,18 @@ done
 
 
 #####
-SCRIPT=/mnt/sda/Public/Project/collabration/AoLab/20251208ATAC/analysis/0.script/02_callpeak.sh
+SCRIPT=/mnt/sda/Public/Project/collabration/AoLab/20251208ATAC/analysis/0.script/02_call_peak.sh
 
 ANALYSIS="/mnt/sda/Public/Project/collabration/AoLab/20251208ATAC/analysis"
 
+
+# 检查脚本路径是否存在
 [ -f "$SCRIPT" ] || { echo "ERROR: SCRIPT not found: $SCRIPT" >&2; exit 1; }
 [ -d "$ANALYSIS" ] || { echo "ERROR: ANALYSIS dir not found: $ANALYSIS" >&2; exit 1; }
 
-
-if [ -d "$ANALYSIS/3.alignment" ]; then
-  BAMDIR="$ANALYSIS/3.alignment"
-else
-  # 兜底：全盘搜一个 final.bam 来推断目录（避免你在不同机器/路径变动）
-  BAMDIR="$(find "$ANALYSIS" -maxdepth 5 -type f -name '*.final.bam' -print -quit | xargs -r dirname)"
-fi
-
-[ -n "${BAMDIR:-}" ] && [ -d "$BAMDIR" ] || { echo "ERROR: cannot locate BAMDIR under $ANALYSIS" >&2; exit 1; }
+# 判断 BAM 文件所在目录
+BAMDIR="$ANALYSIS/3.alignment"
+[ -d "$BAMDIR" ] || { echo "ERROR: Cannot locate BAMDIR under $ANALYSIS" >&2; exit 1; }
 echo "[INFO] Using BAMDIR=$BAMDIR"
 
 for rep in 3 4 5; do
