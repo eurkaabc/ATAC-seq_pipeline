@@ -1,5 +1,5 @@
 # ATAC-seq_pipeline
-
+conda activate /mnt/sda/Public/Environment/miniconda3/envs/atac-seq
 #一个样品
 RAW=/mnt/sda/Public/Project/collabration/AoLab/20251208ATAC/rawdata
 SCRIPT=/mnt/sda/Public/Project/collabration/AoLab/20251208ATAC/analysis/01_qc_map_mm10.sh
@@ -114,7 +114,7 @@ done
 set -euo pipefail
 
 # ========= 配置区 =========
-SCRIPT="/mnt/sda/Public/Project/collabration/AoLab/20251210ATAC/analysis/0.script/02_call_peak.sh"  # 修改为目标脚本路径
+SCRIPT="/mnt/sda/Public/Project/collabration/AoLab/20251210ATAC/analysis/0.script/02_call_peak_nuclesosome.sh"  # 修改为目标脚本路径
 ANALYSIS="/mnt/sda/Public/Project/collabration/AoLab/20251210ATAC/analysis"  # 新样本路径
 
 # 检查脚本路径是否存在
